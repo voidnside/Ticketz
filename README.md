@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ticketz
 
-## Getting Started
+Ticketz is a portfolio project exploring a customer-support workflow and KPI tracking. The planned support conversations will come from WhatsApp and email; the current implementation scope is **staff users only**.
 
-First, run the development server:
+## Current status
+
+- Next.js app scaffolded
+- Prisma ORM 8 PostgreSQL contract initialized
+- User roles: `AGENT`, `LEAD`, and `MANAGER`
+- Database schema and migrations are still being developed
+
+## Tech stack
+
+- Next.js 16, React 19, TypeScript
+- PostgreSQL (Neon for development)
+- Prisma ORM 8 contract-based schema
+- Tailwind CSS 4
+
+## Getting started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file in the project root and set the PostgreSQL connection string:
+
+```env
+DATABASE_URL="your-postgresql-connection-string"
+```
+
+Keep `.env` private and do not commit database credentials. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The Prisma contract source is [`src/prisma/contract.prisma`](src/prisma/contract.prisma). Edit that source, then emit the generated contract with:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run contract:emit
+```
 
-## Learn More
+Generated contract artifacts in `src/prisma/` are outputs; edit the `.prisma` source rather than generated files.
 
-To learn more about Next.js, take a look at the following resources:
+## Project notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Data model](docs/data-model.md) — current user model and role decisions
+- [KPI definitions](docs/kpi-definitions.md) — planned metrics and open definition questions
+- [Decision log](docs/decisions.md) — scope and architecture decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ticket, customer/contact, and message models are intentionally out of the current scope. KPI implementation will follow once those concepts and their lifecycle are designed.
