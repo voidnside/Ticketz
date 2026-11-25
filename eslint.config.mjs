@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated Prisma contract declarations are emitted by Prisma, not maintained by hand.
+    "src/prisma/contract.d.ts",
   ]),
 ]);
 
